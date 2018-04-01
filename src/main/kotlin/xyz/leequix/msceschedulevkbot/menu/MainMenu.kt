@@ -23,6 +23,7 @@ class MainMenu : Menu() {
                     .from(group)
                     .to(user.vkontakteId)
                     .send()
+            userService.setIdle(user)
         }
         2 -> {
             if (user.group === null) {
@@ -42,6 +43,7 @@ class MainMenu : Menu() {
                 user.group = null
                 userService.save(user)
             }
+            userService.setIdle(user)
         }
         else -> sendMessageAboutUnknownElementIndex(user)
     }

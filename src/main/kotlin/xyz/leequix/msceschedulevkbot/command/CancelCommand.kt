@@ -27,5 +27,6 @@ class CancelCommand : Command() {
 
     companion object {
         const val COMMAND_NAME = "cancel"
+        const val COMMAND_DESCRIPTION = "Отменяет текущее действие"
     }
 }

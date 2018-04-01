@@ -6,10 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Lazy
 import org.springframework.context.annotation.Scope
-import xyz.leequix.msceschedulevkbot.command.CancelCommand
-import xyz.leequix.msceschedulevkbot.command.Command
-import xyz.leequix.msceschedulevkbot.command.OpenMainMenuCommand
-import xyz.leequix.msceschedulevkbot.command.UnknownCommand
+import xyz.leequix.msceschedulevkbot.command.*
 import xyz.leequix.msceschedulevkbot.service.MenuService
 import xyz.leequix.msceschedulevkbot.service.UserService
 
@@ -31,6 +28,7 @@ class CommandConfiguration {
         val command = when(name) {
             OpenMainMenuCommand.COMMAND_NAME -> OpenMainMenuCommand()
             CancelCommand.COMMAND_NAME -> CancelCommand()
+            HelpCommand.COMMAND_NAME -> HelpCommand()
             else -> UnknownCommand()
         }
 

@@ -12,5 +12,6 @@ class OpenMainMenuCommand : Command() {
 
     companion object {
         const val COMMAND_NAME = "main_menu"
+        const val COMMAND_DESCRIPTION = "Открывает главное меню"
     }
 }
