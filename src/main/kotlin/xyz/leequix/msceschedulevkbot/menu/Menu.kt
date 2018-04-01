@@ -28,7 +28,7 @@ abstract class Menu {
     }
 
     fun show(user: User) {
-        user.state["status"] = "MENU"
+        user.state["status"] = MENU_USER_STATUS
         user.state["menu"] = menuId
         userService.save(user)
 
@@ -38,5 +38,9 @@ abstract class Menu {
                 .to(user.vkontakteId)
                 .title(getMenuHeader())
                 .send()
+    }
+
+    companion object {
+        const val MENU_USER_STATUS = "MENU"
     }
 }
