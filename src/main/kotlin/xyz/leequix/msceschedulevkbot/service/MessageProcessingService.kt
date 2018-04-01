@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
 import org.springframework.core.env.get
 import org.springframework.stereotype.Service
+import xyz.leequix.msceschedulevkbot.constant.UserState
+import xyz.leequix.msceschedulevkbot.constant.UserStatus
+import xyz.leequix.msceschedulevkbot.menu.MainMenu
 import xyz.leequix.msceschedulevkbot.menu.Menu
 import xyz.leequix.msceschedulevkbot.model.User
 import java.util.regex.Pattern
@@ -14,18 +17,18 @@ import java.util.regex.Pattern
 @Service
 class MessageProcessingService {
     @Autowired
-    lateinit var beanFactory: BeanFactory
+    lateinit var menuService: MenuService
 
-    fun onGetMessage(user: User, message: Message) = when(user.state["status"]) {
-        "IDLE" ->
+    fun onGetMessage(user: User, message: Message) = when(user.state[UserState.STATUS.state]) {
+        UserStatus.IDLE.name ->
             if (message.text == "menu") {
-                val menu = beanFactory.getBean(Menu::class.java, "MainMenu")
+                val menu = menuService.getMenuById(MainMenu.MENU_ID)
                 menu.show(user)
             } else {}
-        Menu.MENU_USER_STATUS ->
+        UserStatus.MENU.name ->
             if(Pattern.compile("\\d+").matcher(message.text).matches()) {
-                val menu = beanFactory.getBean(Menu::class.java, user.state["menu"])
-                menu.onSelected(message.text.toInt())
+                val menu = menuService.getMenuById(user.state[UserState.MENU.state]!!)
+                menu.onSelected(user, message.text.toInt())
             } else {}
         else -> {}
     }
