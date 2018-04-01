@@ -23,7 +23,9 @@ class UserService {
         return@orElseGet user
     }
 
-    fun save(user: User) = userRepository.save(user)
+    fun save(user: User) {
+        userRepository.save(user)
+    }
 
     fun setIdle(user: User) {
         user.state[UserState.STATUS.state] = UserStatus.IDLE.name
