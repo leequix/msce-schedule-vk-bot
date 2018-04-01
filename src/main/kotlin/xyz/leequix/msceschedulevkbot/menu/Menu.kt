@@ -2,6 +2,7 @@ package xyz.leequix.msceschedulevkbot.menu
 
 import com.petersamokhin.bots.sdk.clients.Group
 import com.petersamokhin.bots.sdk.objects.Message
+import org.springframework.beans.factory.BeanFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import xyz.leequix.msceschedulevkbot.model.User
@@ -10,6 +11,7 @@ import xyz.leequix.msceschedulevkbot.service.UserService
 abstract class Menu {
     lateinit var group: Group
     lateinit var userService: UserService
+    lateinit var beanFactory: BeanFactory
 
     abstract val menuId: String
     protected abstract fun getMenuElements(): List<String>

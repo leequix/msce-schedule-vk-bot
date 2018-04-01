@@ -1,6 +1,7 @@
 package xyz.leequix.msceschedulevkbot.config
 
 import com.petersamokhin.bots.sdk.clients.Group
+import org.springframework.beans.factory.BeanFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -19,6 +20,9 @@ class MenuConfiguration {
     @Autowired
     private lateinit var userService: UserService
 
+    @Autowired
+    private lateinit var beanFactory: BeanFactory
+
     @Bean
     @Scope("prototype")
     @Lazy(true)
@@ -29,6 +33,7 @@ class MenuConfiguration {
         }
         menu.group = group
         menu.userService = userService
+        menu.beanFactory = beanFactory
 
         return menu
     }
