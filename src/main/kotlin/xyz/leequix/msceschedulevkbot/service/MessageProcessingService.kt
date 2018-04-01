@@ -22,7 +22,7 @@ class MessageProcessingService {
                 val menu = beanFactory.getBean(Menu::class.java, "MainMenu")
                 menu.show(user)
             } else {}
-        "MENU" ->
+        Menu.MENU_USER_STATUS ->
             if(Pattern.compile("\\d+").matcher(message.text).matches()) {
                 val menu = beanFactory.getBean(Menu::class.java, user.state["menu"])
                 menu.onSelected(message.text.toInt())
