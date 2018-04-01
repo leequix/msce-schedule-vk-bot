@@ -19,17 +19,24 @@ class MessageProcessingService {
     @Autowired
     lateinit var menuService: MenuService
 
-    fun onGetMessage(user: User, message: Message) = when(user.state[UserState.STATUS.state]) {
-        UserStatus.IDLE.name ->
-            if (message.text == "menu") {
-                val menu = menuService.getMenuById(MainMenu.MENU_ID)
-                menu.show(user)
-            } else {}
-        UserStatus.MENU.name ->
-            if(Pattern.compile("\\d+").matcher(message.text).matches()) {
-                val menu = menuService.getMenuById(user.state[UserState.MENU.state]!!)
-                menu.onSelected(user, message.text.toInt())
-            } else {}
-        else -> {}
-    }
+    @Autowired
+    lateinit var commandService: CommandService
+
+    fun onGetMessage(user: User, message: Message) =
+        if (Pattern.compile("^/\\w+$").matcher(message.text).matches()) {
+            commandService.getCommandByName(message.text.substring(1))
+                    .onExecuted(user)
+        }
+        else {
+            when (user.state[UserState.STATUS.state]) {
+                UserStatus.MENU.name ->
+                    if (Pattern.compile("\\d+").matcher(message.text).matches()) {
+                        val menu = menuService.getMenuById(user.state[UserState.MENU.state]!!)
+                        menu.onSelected(user, message.text.toInt())
+                    } else {
+                    }
+                else -> {
+                }
+            }
+        }
 }
