@@ -20,4 +20,6 @@ class UserService {
 
         return@orElseGet user
     }
+
+    fun save(user: User) = userRepository.save(user)
 }
