@@ -2,6 +2,8 @@ package xyz.leequix.msceschedulevkbot.service
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import xyz.leequix.msceschedulevkbot.constant.UserState
+import xyz.leequix.msceschedulevkbot.constant.UserStatus
 import xyz.leequix.msceschedulevkbot.model.User
 import xyz.leequix.msceschedulevkbot.repository.UserRepository
 
@@ -13,7 +15,7 @@ class UserService {
     fun getOrCreateUser(vkontakteId: Int) = userRepository
             .findByVkontakteId(vkontakteId).orElseGet {
         val userState = HashMap<String, String>()
-        userState["status"] = "IDLE"
+        userState[UserState.STATUS.state] = UserStatus.IDLE.name
 
         val user = User(vkontakteId, null, userState)
         userRepository.save(user)
@@ -22,4 +24,9 @@ class UserService {
     }
 
     fun save(user: User) = userRepository.save(user)
+
+    fun setIdle(user: User) {
+        user.state[UserState.STATUS.state] = UserStatus.IDLE.name
+        userRepository.save(user)
+    }
 }
