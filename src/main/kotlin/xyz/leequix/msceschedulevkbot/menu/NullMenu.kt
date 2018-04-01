@@ -1,5 +1,7 @@
 package xyz.leequix.msceschedulevkbot.menu
 
+import xyz.leequix.msceschedulevkbot.model.User
+
 class NullMenu : Menu() {
     override val menuId = ""
 
@@ -7,6 +9,6 @@ class NullMenu : Menu() {
 
     override fun getMenuHeader() = ""
 
-    override fun onSelected(elementIndex: Int) {
+    override fun onSelected(user: User, elementIndex: Int) {
     }
 }
