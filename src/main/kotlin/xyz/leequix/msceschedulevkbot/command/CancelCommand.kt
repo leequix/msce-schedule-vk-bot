@@ -10,7 +10,7 @@ class CancelCommand : Command() {
         if (user.state[UserState.STATUS.state]!! == UserStatus.IDLE.name) {
             Message()
                     .title("Ошибка")
-                    .text("Вы не выполняете никаких действия")
+                    .text("Вы не выполняете никаких действий")
                     .from(group)
                     .to(user.vkontakteId)
                     .send()
