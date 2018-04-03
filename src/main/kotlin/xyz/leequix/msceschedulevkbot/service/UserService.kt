@@ -28,8 +28,8 @@ class UserService {
     }
 
     fun setIdle(user: User) {
+        user.state.clear()
         user.state[UserState.STATUS.state] = UserStatus.IDLE.name
-        user.state.remove(UserState.MENU.state)
 
         userRepository.save(user)
     }
