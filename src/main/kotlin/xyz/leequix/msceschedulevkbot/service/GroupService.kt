@@ -10,6 +10,8 @@ class GroupService {
     @Autowired
     private lateinit var groupRepository: GroupRepositroy
 
+    fun findAll() = groupRepository.findAll()
+
     fun updateOrCreateAll(groups: List<Group>) {
         for (group in groups) {
             if (!groupRepository.existsByNumber(group.number)) {
@@ -17,4 +19,6 @@ class GroupService {
             }
         }
     }
+
+    fun findByNumber(number: String): Group? = groupRepository.findByNumber(number).orElse(null)
 }
