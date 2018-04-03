@@ -5,7 +5,7 @@ import xyz.leequix.msceschedulevkbot.model.User
 class NullMenu : Menu() {
     override val menuId = ""
 
-    override fun getMenuElements() = emptyList<String>()
+    override fun getMenuElements(user: User) = emptyList<String>()
 
     override fun getMenuHeader() = ""
 

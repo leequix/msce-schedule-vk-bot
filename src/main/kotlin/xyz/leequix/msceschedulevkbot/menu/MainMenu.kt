@@ -7,23 +7,18 @@ import xyz.leequix.msceschedulevkbot.model.User
 class MainMenu : Menu() {
     override val menuId = MENU_ID
 
-    override fun getMenuElements() =
+    override fun getMenuElements(user: User) =
             listOf(
                     "Подписаться на группу",
                     "Отписаться от группы"
             )
 
-    override fun getMenuHeader() = "Выбирай"
+    override fun getMenuHeader() = "Главное меню"
 
     override fun onSelected(user: User, elementIndex: Int) = when(elementIndex) {
         1 -> {
-            Message()
-                    .title("Ошибка")
-                    .text("Not implemented")
-                    .from(group)
-                    .to(user.vkontakteId)
-                    .send()
-            userService.setIdle(user)
+            val menu = menuService.getMenuById(SelectGroupMenu.MENU_ID)
+            menu.show(user)
         }
         2 -> {
             if (user.group === null) {

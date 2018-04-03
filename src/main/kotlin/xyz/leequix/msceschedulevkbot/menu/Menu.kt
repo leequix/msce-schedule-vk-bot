@@ -19,28 +19,32 @@ abstract class Menu {
     lateinit var menuService: MenuService
 
     abstract val menuId: String
-    protected abstract fun getMenuElements(): List<String>
+    protected abstract fun getMenuElements(user: User): List<String>
     protected abstract fun getMenuHeader(): String
     abstract fun onSelected(user:User, elementIndex: Int)
 
-    private fun generateMenuString(): String {
+    private fun generateMenuString(user: User): String {
         var menuString = String()
-        val menuElements = getMenuElements()
+        val menuElements = getMenuElements(user)
 
         for(elementIndex in 1 .. menuElements.size) {
-            menuString += "$elementIndex. ${menuElements[elementIndex - 1]}\n"
+            menuString += "$elementIndex) ${menuElements[elementIndex - 1]}\n"
         }
 
         return menuString
     }
 
     fun show(user: User) {
+        user.state.clear()
+
+        val messageText = generateMenuString(user)
+
         user.state[UserState.STATUS.state] = UserStatus.MENU.name
         user.state[UserState.MENU.state] = menuId
         userService.save(user)
 
         Message()
-                .text(generateMenuString())
+                .text(messageText)
                 .from(group)
                 .to(user.vkontakteId)
                 .title(getMenuHeader())
