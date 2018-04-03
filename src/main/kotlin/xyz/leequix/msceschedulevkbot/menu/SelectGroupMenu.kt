@@ -11,12 +11,23 @@ class SelectGroupMenu : Menu() {
 
     override fun getMenuElements(user: User): List<String> {
         val groups = groupService.findAll()
-        val menuElements = groups.map { it.number }
+        if (groups.isEmpty()) {
+            Message()
+                    .title("Ошибка")
+                    .text("У нас еще нет ни одной группы")
+                    .from(group)
+                    .to(user.vkontakteId)
+                    .send()
+            userService.setIdle(user)
+        } else {
+            val menuElements = groups.map { it.number }
 
-        user.state[UserState.MENU_ELEMENTS.state] =
-                GroupsToStateSerializer.serialize(menuElements)
+            user.state[UserState.MENU_ELEMENTS.state] =
+                    GroupsToStateSerializer.serialize(menuElements)
 
-        return menuElements
+            return menuElements
+        }
+        return emptyList()
     }
 
     override fun getMenuHeader() = "Выбор группы"

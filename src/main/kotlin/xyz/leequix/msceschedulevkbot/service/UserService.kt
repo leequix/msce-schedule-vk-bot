@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import xyz.leequix.msceschedulevkbot.constant.UserState
 import xyz.leequix.msceschedulevkbot.constant.UserStatus
+import xyz.leequix.msceschedulevkbot.model.Group
 import xyz.leequix.msceschedulevkbot.model.User
 import xyz.leequix.msceschedulevkbot.repository.UserRepository
 
@@ -26,6 +27,8 @@ class UserService {
     fun save(user: User) {
         userRepository.save(user)
     }
+
+    fun findAllByGroup(group: Group) = userRepository.findAllByGroup(group)
 
     fun setIdle(user: User) {
         user.state.clear()
