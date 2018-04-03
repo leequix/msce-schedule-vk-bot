@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope
 import xyz.leequix.msceschedulevkbot.menu.MainMenu
 import xyz.leequix.msceschedulevkbot.menu.Menu
 import xyz.leequix.msceschedulevkbot.menu.NullMenu
+import xyz.leequix.msceschedulevkbot.menu.SelectGroupMenu
 import xyz.leequix.msceschedulevkbot.service.GroupService
 import xyz.leequix.msceschedulevkbot.service.MenuService
 import xyz.leequix.msceschedulevkbot.service.UserService
@@ -34,6 +35,7 @@ class MenuConfiguration {
     fun getMenuById(id: String): Menu {
         val menu = when (id) {
             MainMenu.MENU_ID -> MainMenu()
+            SelectGroupMenu.MENU_ID -> SelectGroupMenu()
             else -> NullMenu()
         }
         menu.group = group
