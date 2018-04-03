@@ -5,7 +5,7 @@
 
 	<groupId>xyz.leequix</groupId>
 	<artifactId>msce-schedule-vk-bot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>msce-schedule-vk-bot</name>
@@ -55,6 +55,20 @@
 			<groupId>com.coxautodev</groupId>
 			<artifactId>graphql-java-client</artifactId>
 			<version>0.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mashape.unirest</groupId>
+			<artifactId>unirest-java</artifactId>
+			<version>1.4.9</version>
 		</dependency>
 	</dependencies>
 
