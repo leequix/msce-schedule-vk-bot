@@ -2,6 +2,7 @@ package xyz.leequix.msceschedulevkbot.service
 
 import com.coxautodev.graphql.client.GraphQLClient
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import xyz.leequix.msceschedulevkbot.model.Group
 
@@ -15,7 +16,8 @@ class GroupFetchingService {
     @Autowired
     private lateinit var groupService: GroupService
 
-    fun getGroups() {
+    @Scheduled(cron = "0 0 */2 * * *")
+    fun fetchGroups() {
         val fetchingResult = graphQLClient
                 .query(GET_GROUPS_QUERY, GroupsFetchingResult::class.java)
         groupService.updateOrCreateAll(fetchingResult.groups)
