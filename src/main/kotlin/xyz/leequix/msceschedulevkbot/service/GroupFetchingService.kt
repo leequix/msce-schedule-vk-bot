@@ -24,6 +24,11 @@ class GroupFetchingService {
     }
 
     companion object {
-        private const val GET_GROUPS_QUERY = "{groups: findAllGroups{number}}"
+        private const val GET_GROUPS_QUERY =
+                "{" +
+                    "groups: findAllGroups {" +
+                        "number" +
+                    "}" +
+                "}"
     }
 }
