@@ -8,12 +8,14 @@ import org.springframework.stereotype.Component
 import xyz.leequix.msceschedulevkbot.constant.UserState
 import xyz.leequix.msceschedulevkbot.constant.UserStatus
 import xyz.leequix.msceschedulevkbot.model.User
+import xyz.leequix.msceschedulevkbot.service.GroupService
 import xyz.leequix.msceschedulevkbot.service.MenuService
 import xyz.leequix.msceschedulevkbot.service.UserService
 
 abstract class Menu {
     lateinit var group: Group
     lateinit var userService: UserService
+    lateinit var groupService: GroupService
     lateinit var menuService: MenuService
 
     abstract val menuId: String
